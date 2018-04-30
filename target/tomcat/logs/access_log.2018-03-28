@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:51 +0800] "GET /AntNet/index.jsp HTTP/1.1" 200 1990 http-bio-8080-exec-1 152
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:51 +0800] "GET /AntNet/js/bootstrap.min.js HTTP/1.1" 304 - http-bio-8080-exec-3 8
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:51 +0800] "GET /AntNet/js/jquery-1.11.3.min.js HTTP/1.1" 304 - http-bio-8080-exec-2 9
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:51 +0800] "GET /AntNet/css/bootstrap.min.css HTTP/1.1" 304 - http-bio-8080-exec-7 37
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:52 +0800] "GET /AntNet/login.jsp HTTP/1.1" 200 2152 http-bio-8080-exec-9 7
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:52 +0800] "GET /AntNet/download.jsp HTTP/1.1" 200 254 http-bio-8080-exec-8 34
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:56:53 +0800] "GET /AntNet/header.jsp HTTP/1.1" 200 2483 http-bio-8080-exec-10 999
+0:0:0:0:0:0:0:1 - - [28/Mar/2018:14:57:06 +0800] "GET /AntNet/DownloadServlet?filename=a.jpg HTTP/1.1" 200 294313 http-bio-8080-exec-10 79
