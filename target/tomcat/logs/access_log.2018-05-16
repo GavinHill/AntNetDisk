@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:08 +0800] "GET /AntNetDisk/index.jsp HTTP/1.1" 200 2258 http-bio-8080-exec-1 238
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:08 +0800] "GET /AntNetDisk/js/jquery-1.11.3.min.js HTTP/1.1" 200 95957 http-bio-8080-exec-2 39
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:08 +0800] "GET /AntNetDisk/js/bootstrap.min.js HTTP/1.1" 200 37045 http-bio-8080-exec-4 34
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:08 +0800] "GET /AntNetDisk/css/bootstrap.min.css HTTP/1.1" 200 121200 http-bio-8080-exec-3 71
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:09 +0800] "GET /AntNetDisk/header.jsp HTTP/1.1" 200 3068 http-bio-8080-exec-7 75
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:09 +0800] "GET /AntNetDisk/footer.jsp HTTP/1.1" 200 159 http-bio-8080-exec-8 79
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:09 +0800] "GET /AntNetDisk/blank.jsp HTTP/1.1" 200 280 http-bio-8080-exec-5 111
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:09 +0800] "GET /AntNetDisk/login.jsp HTTP/1.1" 200 2394 http-bio-8080-exec-6 149
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:10 +0800] "GET /AntNetDisk/img/welcome.jpg HTTP/1.1" 200 423036 http-bio-8080-exec-6 119
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:36:10 +0800] "GET /AntNetDisk/img/iocn/ant.ico HTTP/1.1" 200 16958 http-bio-8080-exec-6 19
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:37:45 +0800] "GET /AntNetDisk/register.jsp HTTP/1.1" 200 2404 http-bio-8080-exec-7 127
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:38:37 +0800] "POST /AntNetDisk/LoginServlet HTTP/1.1" 200 2112 http-bio-8080-exec-8 788
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:38:38 +0800] "GET /AntNetDisk/GetFileDataServlet?parentid=0 HTTP/1.1" 200 6247 http-bio-8080-exec-8 66
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:38:38 +0800] "GET /AntNetDisk/img/fileupload.jpg HTTP/1.1" 200 26953 http-bio-8080-exec-8 25
+0:0:0:0:0:0:0:1 - - [16/May/2018:01:41:00 +0800] "POST /AntNetDisk/UploadServlet HTTP/1.1" 200 6880 http-bio-8080-exec-3 503

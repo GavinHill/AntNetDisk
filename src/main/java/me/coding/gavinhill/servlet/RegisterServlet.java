@@ -1,6 +1,7 @@
 package me.coding.gavinhill.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,8 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 控制台输出
+		System.out.println("RegisterServlet doGet 调用");
 		
 		// 从JSP页面中读取输入的账号、密码、姓名、手机
 		String useraccount = request.getParameter("inputAccount");
@@ -62,13 +65,16 @@ public class RegisterServlet extends HttpServlet {
 		} else{
 			//匹配失败进行注册操作
 			try {
-				isReg = UserDao.register(user.getUseraccount(), user.getUserpsword(),user.getUsername(),user.getUsertel());
+				isReg = UserDao.register(user.getUseraccount(), 
+						user.getUserpsword(),user.getUsername(),user.getUsertel());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			if(isReg) {
+			// 提示注册成功
 			System.out.println("注册成功");
-		    // 提示注册成功
+			PrintWriter out = response.getWriter();
+			out.print("注册成功");
 			}
 		}	
 	}

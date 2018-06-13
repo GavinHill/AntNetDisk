@@ -78,19 +78,17 @@ public class UserDao {
 			throws SQLException {
 
 		// 设置SQL语句和用户ID参数
-		String userID = getNextID();
-		String sql = "INSERT INTO user (user_id,user_account,user_psword,user_name,user_tel) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO user (user_account,user_psword,user_name,user_tel) VALUES (?,?,?,?)";
 
 		// 获取数据连接池连接
 		Connection con = DataSourceUtils.getConn();
 
 		// 进行注册操作
 		PreparedStatement RegisterStatement = con.prepareStatement(sql);
-		RegisterStatement.setString(1, userID);
-		RegisterStatement.setString(2, useraccount);
-		RegisterStatement.setString(3, userpsword);
-		RegisterStatement.setString(4, username);
-		RegisterStatement.setString(5, usertel);
+		RegisterStatement.setString(1, useraccount);
+		RegisterStatement.setString(2, userpsword);
+		RegisterStatement.setString(3, username);
+		RegisterStatement.setString(4, usertel);
 		int rs = RegisterStatement.executeUpdate();
 		if (rs == 1) {
 			con.close();
@@ -101,20 +99,5 @@ public class UserDao {
 			RegisterStatement.close();
 			return false;
 		}
-	}
-
-	public static String getNextID() throws SQLException {
-		String userID = null;
-
-		String sql = "SELECT COUNT(1) FROM user";// 以固定值的方法来查询一共多少行
-
-		// 计算用户量并分配新的ID
-		Connection con = DataSourceUtils.getConn();
-		PreparedStatement preRegisterStatement = con.prepareStatement(sql);
-		ResultSet rs = preRegisterStatement.executeQuery();
-		rs.next();
-		userID = rs.getInt(1) + 1 + "";
-		DataSourceUtils.close(con, preRegisterStatement, rs);
-		return userID;
 	}
 }

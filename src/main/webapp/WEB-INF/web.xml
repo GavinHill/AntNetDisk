@@ -58,4 +58,24 @@
     <servlet-name>GetFileDataServlet</servlet-name>
     <url-pattern>/GetFileDataServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FileManageServlet</display-name>
+    <servlet-name>FileManageServlet</servlet-name>
+    <servlet-class>me.coding.gavinhill.servlet.FileManageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileManageServlet</servlet-name>
+    <url-pattern>/FileManageServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>GetShareFileServlet</display-name>
+    <servlet-name>GetShareFileServlet</servlet-name>
+    <servlet-class>me.coding.gavinhill.servlet.GetShareFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetShareFileServlet</servlet-name>
+    <url-pattern>/GetShareFileServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -47,6 +46,8 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// 控制台输出
+		System.out.println("UploadServlet doGet 调用");
 		
 		// 定义一个Map用于存储文件信息
 		Map<String, String> map = new HashMap<String, String>();
@@ -106,41 +107,42 @@ public class UploadServlet extends HttpServlet {
 					OutputStream out = new FileOutputStream(new File(uploadPath, fileuuid));
 					IOUtils.In2Out(in, out);
 					IOUtils.closeIO(in, out);
-					item.delete();// 删除临时文件
-				
+					item.delete();// 删除临时文件	
 					
-					//设置
+					//设置UserID
 					map.put("userid", UserDao.user.getUserid());
 				}
 			}
 			
 			//测试用，遍历map
+			/*
 			for (Entry<String, String> entry : map.entrySet()) {
 				String key = entry.getKey().toString();
 				String value = entry.getValue().toString();
 				System.out.println("key=" + key + " value=" + value);
-			}
+			}*/
 
 			// 封装数据
 			Cloudfile uploadcloudfile = new Cloudfile();
 			BeanUtils.populate(uploadcloudfile, map);
 			
 			//使用Date获取当前时间
-			Date date= new java.sql.Date(new java.util.Date().getTime());
+			Date date = new java.sql.Date(new java.util.Date().getTime());
 			uploadcloudfile.setUploaddate(date);
 			
-			isUpload = FileDao.upload(uploadcloudfile.getUserid(), uploadcloudfile.getFileuuid(), uploadcloudfile.getFilename(), uploadcloudfile.getFilepath(), uploadcloudfile.getUploaddate());
+			//parentid=0代表根目录，filetype=file代表非文件夹，isshare=0代表未分享
+			isUpload = FileDao.upload(uploadcloudfile.getUserid(), uploadcloudfile.getFileuuid(), uploadcloudfile.getFilename(), uploadcloudfile.getFilepath(), "0", "File" , uploadcloudfile.getUploaddate(), "0");
 		    } catch (Exception e) {
 			    e.printStackTrace();
 		    }
 			
 			// 4.重定向回主页
 			if(isUpload) {
-			response.sendRedirect(request.getContextPath() + "/file.jsp");
+				request.setAttribute("parentid", "0");
+				request.getRequestDispatcher("GetFileDataServlet").forward(request, response);				
 			} else {
 				System.out.println("失败");
 			}
-
 	}
 
 	/**

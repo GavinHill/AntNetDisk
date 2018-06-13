@@ -17,7 +17,7 @@
 <meta name="description" content="网站描述：蚂蚁云盘存储系统">
 <link rel="icon" href="img/iocn/ant.ico">
 
-<title>蚂蚁网盘</title>
+<title>小蚁网盘</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -32,6 +32,7 @@ body {
 	margin: 0px;
 }
 </style>
+
 </head>
 
 <body>
@@ -39,7 +40,7 @@ body {
 	<!-- 页面头部 -->
 	<div class="container">
 		<header>
-			<iframe src="header.jsp" width="100%" height="50px" scrolling="no"
+			<iframe src="header.jsp" name="header" width="100%" height="50px" scrolling="no"
 				frameborder="0"></iframe>
 		</header>
 	</div>
@@ -49,12 +50,12 @@ body {
 		<div class="row">
 			<div class="col-md-2">
 				<!-- 用户登录及注册 -->
-				<iframe src="login.jsp" width="190" height="600" scrolling="no"
+				<iframe src="login.jsp" width="190" height="550" scrolling="no"
 					frameborder="0"></iframe>
 			</div>
 			<div class="col-md-6">
 				<!-- 文件显示 -->
-				<iframe src="blank.jsp" name="blank" width="945px" height="600px"
+				<iframe src="blank.jsp" name="myiframe" width="945px" height="550px"
 					scrolling="yes" frameborder="0"></iframe>
 			</div>
 		</div>

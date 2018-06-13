@@ -15,10 +15,10 @@
 <!-- content的取值为webkit,ie-comp,ie-stand之一，区分大小写，分别代表用webkit内核，IE兼容内核，IE标准内核。 -->
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta name="keywords" content="关键词：网盘">
-<meta name="description" content="网站描述：蚂蚁云盘存储系统">
+<meta name="description" content="网站描述：小蚁云盘存储系统">
 <link rel="icon" href="img/iocn/ant.ico">
 
-<title>蚂蚁网盘</title>
+<title>小蚁网盘</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -35,15 +35,13 @@ body {
 <script type="text/javascript">
 	//该用户界面加载时将blank.jsp刷新为file.jsp
 	window.onload = function() {
-		top.frames["blank"].location = "GetFileDataServlet";
+		top.frames["myiframe"].location = "GetFileDataServlet?parentid=0";
 	}
 </script>
 </head>
 
 <body>
 
-	<%
-	%>
 	<div class="col-sm-10 col-md-10">
 		<h3>欢迎使用，${username}</h3>
 

@@ -13,84 +13,135 @@ import me.coding.gavinhill.utils.DataSourceUtils;
 
 public class FileDao {
 
-	public static boolean upload(String userid, String fileuuid, String filename, String filepath, Date uploaddate)
-			throws SQLException {
+	public static boolean upload(String userid, String fileuuid, String filename, String filepath, String parentid,
+			String filetype, Date uploaddate, String isshare) throws SQLException {
 
 		// 设置SQL语句
-		String sql = "insert into file values(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO file(user_id, file_uuid, file_name, file_path, parent_id, file_type, upload_date, isshare) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// 获取数据连接池连接
 		Connection con = DataSourceUtils.getConn();
 
 		// 获得语句执行平台并设置占位符(?)
-		PreparedStatement CloudfileStatement = con.prepareStatement(sql);
-		CloudfileStatement.setString(1, getNextID());
-		CloudfileStatement.setString(2, userid);
-		CloudfileStatement.setString(3, fileuuid);
-		CloudfileStatement.setString(4, filename);
-		CloudfileStatement.setString(5, filepath);
-		CloudfileStatement.setString(6, "0");
-		CloudfileStatement.setString(7, "1");
-		CloudfileStatement.setDate(8, uploaddate);
-		CloudfileStatement.setString(9, "0");
-		int rs = CloudfileStatement.executeUpdate();
+		PreparedStatement cloudfileStatement = con.prepareStatement(sql);
+		cloudfileStatement.setString(1, userid);
+		cloudfileStatement.setString(2, fileuuid);
+		cloudfileStatement.setString(3, filename);
+		cloudfileStatement.setString(4, filepath);
+		cloudfileStatement.setString(5, parentid);
+		cloudfileStatement.setString(6, filetype);
+		cloudfileStatement.setDate(7, uploaddate);
+		cloudfileStatement.setString(8, isshare);
+		int rs = cloudfileStatement.executeUpdate();
 		if (rs == 1) {
 			con.close();
-			CloudfileStatement.close();
+			cloudfileStatement.close();
 			return true;
 		} else {
 			con.close();
-			CloudfileStatement.close();
+			cloudfileStatement.close();
 			return false;
 		}
 
 	}
 
-	public static String getNextID() {
-		String fileID = null;
-
-		String sql = "SELECT COUNT(1) FROM file";// 以固定值的方法来查询一共多少行
-
-		// 计算用户量并分配新的ID
-		try {
-			Connection con = DataSourceUtils.getConn();
-			PreparedStatement preUploadStatement = con.prepareStatement(sql);
-			ResultSet preRs = preUploadStatement.executeQuery();
-			preRs.next();
-			fileID = preRs.getInt(1) + 1 + "";
-			DataSourceUtils.close(con, preUploadStatement, preRs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return fileID;
-	}
-
-	public static List<Cloudfile> getFileData() throws SQLException {
-		//定义一个List用于封装数据
+	public static List<Cloudfile> getFileData(String parentid, String filename) throws SQLException {
+		// 定义一个List用于封装数据
 		List<Cloudfile> filelist = new ArrayList<Cloudfile>();
-		
-		// 设置SQL语句
-		String sql = "SELECT * FROM file WHERE user_id=? AND parent_id=?";
-		
-		// 获取数据连接池连接
-		Connection con = DataSourceUtils.getConn();
+		ResultSet rs = null;
 
-		// 获得语句执行平台并设置占位符(?)
-		PreparedStatement getFileDataStatement = con.prepareStatement(sql);
-		getFileDataStatement.setString(1, UserDao.user.getUserid());
-		getFileDataStatement.setString(2, "0");
-		ResultSet rs = getFileDataStatement.executeQuery();
-		while (rs.next()) {
-			//封装数据
-			Cloudfile cloudfile = new Cloudfile();
+		if (filename == null) {
+			System.out.println("进入父ID查询");
 			
-			cloudfile.setFilename(rs.getString("file_name"));
+			// 设置SQL语句
+			String sql = "SELECT * FROM file WHERE user_id=? AND parent_id=?";
+
+			// 获取数据连接池连接
+			Connection con = DataSourceUtils.getConn();
+
+			// 获得语句执行平台并设置占位符(?)
+			PreparedStatement getFileDataStatement = con.prepareStatement(sql);
+			getFileDataStatement.setString(1, UserDao.user.getUserid());
+			getFileDataStatement.setString(2, parentid);
+			rs = getFileDataStatement.executeQuery();
+		} else {
+			System.out.println("进入名字查询");
+			
+			// 设置SQL语句
+			String sql = "SELECT * FROM file WHERE user_id=? AND file_name=?";
+			
+			// 获取数据连接池连接
+			Connection con = DataSourceUtils.getConn();
+
+			// 获得语句执行平台并设置占位符(?)
+			PreparedStatement getFileDataStatement = con.prepareStatement(sql);
+			getFileDataStatement.setString(1, UserDao.user.getUserid());
+			getFileDataStatement.setString(2, filename);
+			rs = getFileDataStatement.executeQuery();
+		}
+
+		while (rs.next()) {
+			// 封装数据
+			Cloudfile cloudfile = new Cloudfile();
+
+			cloudfile.setFileid(rs.getString("file_id"));
 			cloudfile.setFileuuid(rs.getString("file_uuid"));
+			cloudfile.setFilename(rs.getString("file_name"));
 			cloudfile.setFilepath(rs.getString("file_path"));
+			cloudfile.setParentid(rs.getString("parent_id"));
 			cloudfile.setFiletype(rs.getString("file_type"));
 			cloudfile.setUploaddate(rs.getDate("upload_date"));
+			cloudfile.setIsshare(rs.getString("isshare"));
 			filelist.add(cloudfile);
 		}
 		return filelist;
+	}
+
+	// 新建文件夹操作
+	public static boolean addNewFolder(String userid, String fileuuid, String filename, String filepath,
+			String parentid, String filetype, Date createdate, String isshare) throws SQLException {
+		String sql = "INSERT INTO file(user_id, file_uuid, file_name, file_path, parent_id, file_type, upload_date, isshare) VALUES(?, ?, ?,? ,?, ?, ?, ?)";
+
+		// 获取数据连接池连接
+		Connection con = DataSourceUtils.getConn();
+
+		PreparedStatement cloudfileStatement = con.prepareStatement(sql);
+		cloudfileStatement.setString(1, userid);
+		cloudfileStatement.setString(2, fileuuid);
+		cloudfileStatement.setString(3, filename);
+		cloudfileStatement.setString(4, filepath);
+		cloudfileStatement.setString(5, parentid);
+		cloudfileStatement.setString(6, filetype);
+		cloudfileStatement.setDate(7, createdate);
+		cloudfileStatement.setString(8, isshare);
+		int rs = cloudfileStatement.executeUpdate();
+		if (rs == 1) {
+			con.close();
+			cloudfileStatement.close();
+			return true;
+		} else {
+			con.close();
+			cloudfileStatement.close();
+			return false;
+		}
+	}
+
+	public static boolean deleteFile(String fileid) throws SQLException {
+		String sql = "DELETE FROM file WHERE file_id=?";
+
+		// 获取数据连接池连接
+		Connection con = DataSourceUtils.getConn();
+		PreparedStatement DeletefileStatement = con.prepareStatement(sql);
+		DeletefileStatement.setString(1, fileid);
+		int rs = DeletefileStatement.executeUpdate();
+		if (rs == 1) {
+			con.close();
+			DeletefileStatement.close();
+			return true;
+		} else {
+			con.close();
+			DeletefileStatement.close();
+			return false;
+		}
 	}
 }

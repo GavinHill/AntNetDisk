@@ -29,6 +29,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// 控制台输出
+		System.out.println("LoginServlet doGet 调用");
 		
 		// 从JSP页面中读取输入的用户名和密码
 		String useraccount = request.getParameter("inputAccount");

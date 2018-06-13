@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>空白页</title>
+<title>小蚁网盘</title>
 <style type="text/css">
 body {
 	margin: 0px;
-	background-color: #F9F2F3;
+	background-color: #FFFFFF;
 }
 </style>
 </head>
 <body>
-	<h2 style="font-family: '微软雅黑';">登陆显示网盘文件</h2>
+		<img alt="" src="img/welcome.jpg" height="540px" width="930px">
 </body>
 </html>
